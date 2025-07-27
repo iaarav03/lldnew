@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iterator Pattern - Complete Guide with Examples</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.8;
+            margin: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            font-size: 16px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 3em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        h2 {
+            color: #34495e;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        h3 {
+            color: #2980b9;
+            margin-top: 30px;
+        }
+        .pattern-intro {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+            font-size: 1.2em;
+        }
+        .real-world-example {
+            background: #fff3cd;
+            border: 2px solid #ffeaa7;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #fdcb6e;
+        }
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .code-comment {
+            color: #68d391;
+        }
+        .code-keyword {
+            color: #f687b3;
+        }
+        .code-string {
+            color: #fbb6ce;
+        }
+        .highlight-box {
+            background: #e8f5e8;
+            border: 2px solid #27ae60;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #27ae60;
+        }
+        .problem-box {
+            background: #ffeaa7;
+            border: 2px solid #fdcb6e;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #e17055;
+        }
+        .solution-box {
+            background: #d5f4e6;
+            border: 2px solid #27ae60;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #27ae60;
+        }
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .pros {
+            background: #d5f4e6;
+            border: 2px solid #27ae60;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .cons {
+            background: #fadbd8;
+            border: 2px solid #e74c3c;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .interview-section {
+            background: #e8f4f8;
+            border: 2px solid #3498db;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+        .step-by-step {
+            background: #f8f9fa;
+            border: 2px solid #6c757d;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .step {
+            background: white;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+        .back-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 500;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+        .back-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        .output-box {
+            background: #1a202c;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            border-left: 4px solid #4299e1;
+        }
+        .analogy-box {
+            background: #f0f8ff;
+            border: 2px solid #4a90e2;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #4a90e2;
+        }
+        .key-point {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #fd7e14;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        .comparison-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-button">← Back to Design Patterns Index</a>
+        
+        <h1>🔄 Iterator Pattern</h1>
+        
+        <div class="pattern-intro">
+            <h2 style="color: white; border: none; margin: 0;">Access elements of a collection sequentially without exposing its internal structure!</h2>
+            <p style="margin: 15px 0 0 0;">Think of it like a TV remote's channel button - you go through channels one by one without knowing how the TV stores them internally!</p>
+        </div>
+
+        <h2>🤔 What is the Iterator Pattern?</h2>
+        
+        <div class="analogy-box">
+            <h3>📚 Real-World Analogy: Reading a Book</h3>
+            <p>Imagine you're reading a book:</p>
+            <ol>
+                <li><strong>You start at page 1</strong> (first element)</li>
+                <li><strong>You read page by page</strong> (iterating through elements)</li>
+                <li><strong>You know if there are more pages</strong> (hasNext)</li>
+                <li><strong>You don't care how pages are bound</strong> (internal structure is hidden)</li>
+                <li><strong>You can bookmark and resume</strong> (maintain current position)</li>
+            </ol>
+            <p><strong>Key Point:</strong> You access the book's content sequentially without worrying about how the book is physically constructed - binding, paper type, printing process, etc.</p>
+        </div>
+
+        <div class="problem-box">
+            <h3>🎯 The Problem It Solves</h3>
+            <p><strong>Without Iterator Pattern:</strong></p>
+            <ul>
+                <li>Client code must know the internal structure of collections (arrays, lists, trees)</li>
+                <li>Different traversal logic for different data structures</li>
+                <li>Tight coupling between client and collection implementation</li>
+                <li>Difficult to change collection type without changing client code</li>
+                <li>No standard way to traverse collections</li>
+            </ul>
+            <p><strong>Example Problem:</strong> Your e-commerce app stores products in an array today, but tomorrow you want to use a linked list or database. Without Iterator, you'd need to rewrite all the code that accesses products!</p>
+        </div>
+
+        <div class="solution-box">
+            <h3>✅ The Solution</h3>
+            <p><strong>With Iterator Pattern:</strong></p>
+            <ul>
+                <li><strong>Uniform Interface:</strong> Same way to access any collection type</li>
+                <li><strong>Encapsulation:</strong> Internal structure is hidden from client</li>
+                <li><strong>Multiple Iterators:</strong> Can have different ways to traverse same collection</li>
+                <li><strong>Lazy Loading:</strong> Can load elements on demand</li>
+                <li><strong>Position Tracking:</strong> Iterator knows where it is in the collection</li>
+            </ul>
+        </div>
+
+        <h2>📚 Understanding Headers: #include &lt;iostream&gt; and #include &lt;vector&gt;</h2>
+        
+        <div class="highlight-box">
+            <h3>🔍 Essential Headers Explained</h3>
+            
+            <h4>1. #include &lt;iostream&gt;</h4>
+            <ul>
+                <li><strong>Purpose:</strong> Input/Output operations</li>
+                <li><strong>Provides:</strong> <code>cout</code>, <code>cin</code>, <code>endl</code></li>
+                <li><strong>When to use:</strong> When you need to print to console or read from keyboard</li>
+            </ul>
+
+            <h4>2. #include &lt;vector&gt;</h4>
+            <ul>
+                <li><strong>Purpose:</strong> Dynamic array container</li>
+                <li><strong>Provides:</strong> <code>std::vector</code> class and its methods</li>
+                <li><strong>Why needed:</strong> Our example uses <code>vector&lt;Product*&gt;</code> to store products</li>
+                <li><strong>Key features:</strong> Dynamic sizing, automatic memory management, random access</li>
+            </ul>
+
+            <p><strong>Important:</strong> Always include headers for the features you use. Without <code>&lt;vector&gt;</code>, the compiler wouldn't know what <code>vector&lt;Product*&gt;</code> means!</p>
+        </div>
+
+        <div class="code-block">
+<pre><span class="code-comment">// Without proper headers</span>
+<span class="code-keyword">int</span> main() {
+    vector&lt;int&gt; numbers; <span class="code-comment">// ❌ ERROR! What's a vector?</span>
+    cout << <span class="code-string">"Hello"</span>; <span class="code-comment">// ❌ ERROR! What's cout?</span>
+}
+
+<span class="code-comment">// With proper headers</span>
+<span class="code-keyword">#include</span> &lt;iostream&gt;  <span class="code-comment">// For cout</span>
+<span class="code-keyword">#include</span> &lt;vector&gt;    <span class="code-comment">// For vector</span>
+<span class="code-keyword">int</span> main() {
+    std::vector&lt;int&gt; numbers; <span class="code-comment">// ✅ Compiler knows what vector is</span>
+    std::cout << <span class="code-string">"Hello"</span>; <span class="code-comment">// ✅ Compiler knows what cout is</span>
+}
+</pre>
+        </div>
+
+        <h2>🛠️ Step-by-Step Implementation</h2>
+        
+        <div class="step-by-step">
+            <h3>Building Our Product Inventory Iterator</h3>
+            
+            <div class="step">
+                <h4>Step 1: Define the Product Class</h4>
+                <p>First, let's create what we want to iterate over - products in an inventory.</p>
+                <div class="code-block">
+<pre><span class="code-keyword">class</span> Product {
+    <span class="code-keyword">private</span>:
+        string name;
+        <span class="code-keyword">double</span> price;
+
+    <span class="code-keyword">public</span>:
+        Product(<span class="code-keyword">const</span> string& name, <span class="code-keyword">const</span> <span class="code-keyword">double</span>& price) : name(name), price(price) {}
+
+        <span class="code-keyword">const</span> string& getName() <span class="code-keyword">const</span> { <span class="code-keyword">return</span> name; }
+        <span class="code-keyword">double</span> getPrice() <span class="code-keyword">const</span> { <span class="code-keyword">return</span> price; }
+};
+</pre>
+                </div>
+                <p><strong>Key Points:</strong></p>
+                <ul>
+                    <li><code>const string&</code> - reference avoids copying, const prevents modification</li>
+                    <li><code>const</code> methods - these methods don't modify the object</li>
+                    <li>Simple data class to represent what we're iterating over</li>
+                </ul>
+            </div>
+
+            <div class="step">
+                <h4>Step 2: Create Iterator Interface</h4>
+                <p>Define the contract that all iterators must follow.</p>
+                <div class="code-block">
+<pre><span class="code-keyword">class</span> Iterator {
+    <span class="code-keyword">public</span>:
+        <span class="code-keyword">virtual</span> ~Iterator() {} <span class="code-comment">// Virtual destructor for proper cleanup</span>
+        <span class="code-keyword">virtual</span> Product* first() = 0;  <span class="code-comment">// Go to first element</span>
+        <span class="code-keyword">virtual</span> Product* next() = 0;   <span class="code-comment">// Move to next element</span>
+        <span class="code-keyword">virtual</span> <span class="code-keyword">bool</span> hasNext() = 0;    <span class="code-comment">// Check if more elements exist</span>
+};
+</pre>
+                </div>
+                <p><strong>Interface Methods:</strong></p>
+                <ul>
+                    <li><code>first()</code> - Reset to beginning and return first element</li>
+                    <li><code>next()</code> - Move to and return next element</li>
+                    <li><code>hasNext()</code> - Check if there are more elements to iterate</li>
+                    <li><code>virtual ~Iterator()</code> - Ensures proper cleanup in derived classes</li>
+                </ul>
+            </div>
+
+            <div class="step">
+                <h4>Step 3: Implement Concrete Iterator</h4>
+                <p>Create the actual iterator that knows how to traverse our product collection.</p>
+                <div class="code-block">
+<pre><span class="code-keyword">class</span> ProductIterator : <span class="code-keyword">public</span> Iterator {
+    <span class="code-keyword">private</span>:
+        vector&lt;Product*&gt;& products; <span class="code-comment">// Reference to the collection</span>
+        size_t current;                <span class="code-comment">// Current position</span>
+
+    <span class="code-keyword">public</span>:
+        ProductIterator(vector&lt;Product*&gt;& products) : products(products), current(0) {}
+
+        Product* first() {
+            <span class="code-keyword">if</span> (products.empty()) <span class="code-keyword">return</span> <span class="code-keyword">nullptr</span>;
+            current = 0;
+            <span class="code-keyword">return</span> products[current];
+        }
+
+        Product* next() {
+            <span class="code-keyword">if</span> (hasNext()) {
+                <span class="code-keyword">return</span> products[++current]; <span class="code-comment">// Pre-increment to move to next</span>
+            }
+            <span class="code-keyword">return</span> <span class="code-keyword">nullptr</span>;
+        }
+
+        <span class="code-keyword">bool</span> hasNext() {
+            <span class="code-keyword">return</span> current < products.size(); <span class="code-comment">// Check if more elements exist</span>
+        }
+};
+</pre>
+                </div>
+                <p><strong>Smart Implementation Details:</strong></p>
+                <ul>
+                    <li><code>vector&lt;Product*&gt;&</code> - Reference avoids copying the entire vector</li>
+                    <li><code>size_t current</code> - Tracks current position in the collection</li>
+                    <li><code>++current</code> - Pre-increment is more efficient than post-increment</li>
+                    <li>Null checks prevent crashes on empty collections</li>
+                </ul>
+            </div>
+
+            <div class="step">
+                <h4>Step 4: Create the Aggregate (Collection)</h4>
+                <p>The collection that holds our data and provides iterators.</p>
+                <div class="code-block">
+<pre><span class="code-keyword">class</span> Inventory {
+    <span class="code-keyword">private</span>:
+        vector&lt;Product*&gt; products;
+
+    <span class="code-keyword">public</span>:
+        <span class="code-keyword">void</span> addProduct(Product* product) {
+            products.push_back(product);
+        }
+
+        Iterator* createIterator() {
+            <span class="code-keyword">return</span> <span class="code-keyword">new</span> ProductIterator(products); <span class="code-comment">// Factory method pattern!</span>
+        }
+};
+</pre>
+                </div>
+                <p><strong>Design Benefits:</strong></p>
+                <ul>
+                    <li>Encapsulates the internal <code>vector</code> storage</li>
+                    <li><code>createIterator()</code> is a factory method</li>
+                    <li>Client doesn't need to know about <code>ProductIterator</code> class</li>
+                    <li>Easy to change internal storage without affecting clients</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>🔧 Complete Working Example</h2>
+        
+        <div class="code-block">
+<pre><span class="code-keyword">#include</span> &lt;iostream&gt;
+<span class="code-keyword">#include</span> &lt;vector&gt;
+
+<span class="code-keyword">using namespace</span> std;
+
+<span class="code-comment">// Product class representing individual products</span>
+<span class="code-keyword">class</span> Product {
+    <span class="code-keyword">private</span>:
+        string name;
+        <span class="code-keyword">double</span> price;
+
+    <span class="code-keyword">public</span>:
+        Product(<span class="code-keyword">const</span> string& name, <span class="code-keyword">const</span> <span class="code-keyword">double</span>& price) : name(name), price(price) {}
+
+        <span class="code-keyword">const</span> string& getName() <span class="code-keyword">const</span> {
+            <span class="code-keyword">return</span> name;
+        }
+
+        <span class="code-keyword">double</span> getPrice() <span class="code-keyword">const</span> {
+            <span class="code-keyword">return</span> price;
+        }
+};
+
+<span class="code-comment">// Iterator interface</span>
+<span class="code-keyword">class</span> Iterator {
+    <span class="code-keyword">public</span>:
+        <span class="code-keyword">virtual</span> ~Iterator() {}
+        <span class="code-keyword">virtual</span> Product* first() = 0;
+        <span class="code-keyword">virtual</span> Product* next() = 0;
+        <span class="code-keyword">virtual</span> <span class="code-keyword">bool</span> hasNext() = 0;
+};
+
+<span class="code-comment">// Concrete iterator for the product collection</span>
+<span class="code-keyword">class</span> ProductIterator : <span class="code-keyword">public</span> Iterator {
+    <span class="code-keyword">private</span>:
+        vector&lt;Product*&gt;& products;
+        size_t current;
+
+    <span class="code-keyword">public</span>:
+        ProductIterator(vector&lt;Product*&gt;& products) : products(products), current(0) {}
+
+        Product* first() {
+            <span class="code-keyword">if</span> (products.empty()) {
+                <span class="code-keyword">return</span> <span class="code-keyword">nullptr</span>;
+            }
+            current = 0;
+            <span class="code-keyword">return</span> products[current];
+        }
+
+        Product* next() {
+            <span class="code-keyword">if</span> (hasNext()) {
+                <span class="code-keyword">return</span> products[++current];
+            }
+            <span class="code-keyword">return</span> <span class="code-keyword">nullptr</span>;
+        }
+
+        <span class="code-keyword">bool</span> hasNext() {
+            <span class="code-keyword">return</span> current < products.size();
+        }
+};
+
+<span class="code-comment">// Aggregate class that stores products and provides an iterator</span>
+<span class="code-keyword">class</span> Inventory {
+    <span class="code-keyword">private</span>:
+        vector&lt;Product*&gt; products;
+    <span class="code-keyword">public</span>:
+        <span class="code-keyword">void</span> addProduct(Product* product) {
+            products.push_back(product);
+        }
+
+        Iterator* createIterator() {
+            <span class="code-keyword">return</span> <span class="code-keyword">new</span> ProductIterator(products);
+        }
+};
+
+<span class="code-keyword">int</span> main() {
+    <span class="code-comment">// Create some products</span>
+    Product product1(<span class="code-string">"Laptop"</span>, 99999.99);
+    Product product2(<span class="code-string">"Smartphone"</span>, 49999.99);
+    Product product3(<span class="code-string">"Headphones"</span>, 7999.99);
+
+    <span class="code-comment">// Create an inventory and add products</span>
+    Inventory inventory;
+    inventory.addProduct(&product1);
+    inventory.addProduct(&product2);
+    inventory.addProduct(&product3);
+
+    <span class="code-comment">// Create an iterator and iterate over the products</span>
+    Iterator* iterator = inventory.createIterator();
+    Product* currentProduct = iterator->first();
+
+    <span class="code-keyword">while</span> (currentProduct) {
+        cout << <span class="code-string">"Product: "</span> << currentProduct->getName() << 
+                        <span class="code-string">", Price: $"</span> << currentProduct->getPrice() << endl;
+        currentProduct = iterator->next();
+    }
+
+    <span class="code-keyword">delete</span> iterator;
+
+    <span class="code-keyword">return</span> 0;
+}
+</pre>
+        </div>
+
+        <div class="output-box">
+            <h4>🖥️ Program Output:</h4>
+            <pre>Product: Laptop, Price: $99999.99
+Product: Smartphone, Price: $49999.99
+Product: Headphones, Price: $7999.99</pre>
+        </div>
+
+        <h2>🧠 How It Works - Flow Analysis</h2>
+        
+        <div class="key-point">
+            <h3>🔄 Step-by-Step Execution</h3>
+            <ol>
+                <li><strong>Setup:</strong> Create products and add them to inventory</li>
+                <li><strong>Get Iterator:</strong> <code>inventory.createIterator()</code> returns a new <code>ProductIterator</code></li>
+                <li><strong>Start Iteration:</strong> <code>iterator->first()</code> sets position to 0, returns first product</li>
+                <li><strong>Loop Check:</strong> <code>while (currentProduct)</code> continues if product is not null</li>
+                <li><strong>Process:</strong> Print current product details</li>
+                <li><strong>Advance:</strong> <code>iterator->next()</code> moves to next product or returns null</li>
+                <li><strong>Repeat:</strong> Loop continues until no more products</li>
+                <li><strong>Cleanup:</strong> Delete iterator to prevent memory leak</li>
+            </ol>
+        </div>
+
+        <h2>🌟 Multiple Iterator Examples</h2>
+
+        <div class="real-world-example">
+            <h3>1. 📋 Reverse Iterator</h3>
+            <p>Iterate through products in reverse order:</p>
+            <div class="code-block">
+<pre><span class="code-keyword">class</span> ReverseProductIterator : <span class="code-keyword">public</span> Iterator {
+    <span class="code-keyword">private</span>:
+        vector&lt;Product*&gt;& products;
+        <span class="code-keyword">int</span> current; <span class="code-comment">// Using int to handle -1</span>
+
+    <span class="code-keyword">public</span>:
+        ReverseProductIterator(vector&lt;Product*&gt;& products) 
+            : products(products), current(products.size() - 1) {}
+
+        Product* first() {
+            <span class="code-keyword">if</span> (products.empty()) <span class="code-keyword">return</span> <span class="code-keyword">nullptr</span>;
+            current = products.size() - 1;
+            <span class="code-keyword">return</span> products[current];
+        }
+
+        Product* next() {
+            <span class="code-keyword">if</span> (hasNext()) {
+                <span class="code-keyword">return</span> products[--current];
+            }
+            <span class="code-keyword">return</span> <span class="code-keyword">nullptr</span>;
+        }
+
+        <span class="code-keyword">bool</span> hasNext() {
+            <span class="code-keyword">return</span> current > 0;
+        }
+};
+</pre>
+            </div>
+        </div>
+
+        <div class="real-world-example">
+            <h3>2. 💰 Price Filter Iterator</h3>
+            <p>Only iterate through products within a price range:</p>
+            <div class="code-block">
+<pre><span class="code-keyword">class</span> PriceFilterIterator : <span class="code-keyword">public</span> Iterator {
+    <span class="code-keyword">private</span>:
+        vector&lt;Product*&gt;& products;
+        size_t current;
+        <span class="code-keyword">double</span> minPrice, maxPrice;
+
+        Product* findNextInRange() {
+            <span class="code-keyword">while</span> (current < products.size()) {
+                Product* product = products[current];
+                <span class="code-keyword">if</span> (product->getPrice() >= minPrice && product->getPrice() <= maxPrice) {
+                    <span class="code-keyword">return</span> product;
+                }
+                current++;
+            }
+            <span class="code-keyword">return</span> <span class="code-keyword">nullptr</span>;
+        }
+
+    <span class="code-keyword">public</span>:
+        PriceFilterIterator(vector&lt;Product*&gt;& products, <span class="code-keyword">double</span> min, <span class="code-keyword">double</span> max) 
+            : products(products), current(0), minPrice(min), maxPrice(max) {}
+
+        Product* first() {
+            current = 0;
+            <span class="code-keyword">return</span> findNextInRange();
+        }
+
+        Product* next() {
+            <span class="code-keyword">if</span> (hasNext()) {
+                current++;
+                <span class="code-keyword">return</span> findNextInRange();
+            }
+            <span class="code-keyword">return</span> <span class="code-keyword">nullptr</span>;
+        }
+
+        <span class="code-keyword">bool</span> hasNext() {
+            size_t temp = current + 1;
+            <span class="code-keyword">while</span> (temp < products.size()) {
+                <span class="code-keyword">if</span> (products[temp]->getPrice() >= minPrice && 
+                    products[temp]->getPrice() <= maxPrice) {
+                    <span class="code-keyword">return</span> <span class="code-keyword">true</span>;
+                }
+                temp++;
+            }
+            <span class="code-keyword">return</span> <span class="code-keyword">false</span>;
+        }
+};
+</pre>
+            </div>
+        </div>
+
+        <h2>🆚 Iterator vs Direct Access Comparison</h2>
+        
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Aspect</th>
+                    <th>Direct Access (Bad)</th>
+                    <th>Iterator Pattern (Good)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Coupling</strong></td>
+                    <td>Client knows collection internals</td>
+                    <td>Client only knows iterator interface</td>
+                </tr>
+                <tr>
+                    <td><strong>Flexibility</strong></td>
+                    <td>Hard to change collection type</td>
+                    <td>Easy to swap collection implementations</td>
+                </tr>
+                <tr>
+                    <td><strong>Traversal</strong></td>
+                    <td>One way only (usually)</td>
+                    <td>Multiple traversal strategies</td>
+                </tr>
+                <tr>
+                    <td><strong>Code Reuse</strong></td>
+                    <td>Traversal logic repeated everywhere</td>
+                    <td>Traversal logic centralized in iterator</td>
+                </tr>
+                <tr>
+                    <td><strong>Safety</strong></td>
+                    <td>Easy to access invalid indices</td>
+                    <td>Iterator prevents invalid access</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="code-block">
+<pre><span class="code-comment">// BAD: Direct Access</span>
+<span class="code-keyword">for</span> (<span class="code-keyword">int</span> i = 0; i < inventory.getSize(); i++) {
+    Product* p = inventory.getProduct(i); <span class="code-comment">// Exposes internal structure</span>
+    cout << p->getName() << endl;
+}
+
+<span class="code-comment">// GOOD: Iterator Pattern</span>
+Iterator* it = inventory.createIterator();
+<span class="code-keyword">for</span> (Product* p = it->first(); p != <span class="code-keyword">nullptr</span>; p = it->next()) {
+    cout << p->getName() << endl; <span class="code-comment">// No knowledge of internal structure</span>
+}
+</pre>
+        </div>
+
+        <h2>🌟 Advantages & Disadvantages</h2>
+        
+        <div class="pros-cons">
+            <div class="pros">
+                <h3>✅ Advantages</h3>
+                <ul>
+                    <li><strong>Uniform Interface:</strong> Same way to traverse any collection</li>
+                    <li><strong>Encapsulation:</strong> Internal structure hidden from client</li>
+                    <li><strong>Multiple Iterators:</strong> Different traversal strategies</li>
+                    <li><strong>Concurrent Iteration:</strong> Multiple iterators on same collection</li>
+                    <li><strong>Lazy Loading:</strong> Load elements on demand</li>
+                    <li><strong>Single Responsibility:</strong> Traversal logic separated</li>
+                </ul>
+            </div>
+            
+            <div class="cons">
+                <h3>❌ Disadvantages</h3>
+                <ul>
+                    <li><strong>Overhead:</strong> Extra object creation and method calls</li>
+                    <li><strong>Memory:</strong> Iterator objects consume memory</li>
+                    <li><strong>Complexity:</strong> More complex than direct access</li>
+                    <li><strong>Performance:</strong> Slower than direct array access</li>
+                    <li><strong>Not Always Needed:</strong> Overkill for simple cases</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>🎯 When to Use Iterator Pattern</h2>
+        
+        <div class="highlight-box">
+            <h3>✅ Use Iterator When:</h3>
+            <ul>
+                <li><strong>Complex Data Structures:</strong> Trees, graphs, custom collections</li>
+                <li><strong>Multiple Traversal Methods:</strong> Forward, backward, filtered</li>
+                <li><strong>Hiding Internal Structure:</strong> Don't want to expose implementation</li>
+                <li><strong>Uniform Access:</strong> Same interface for different collection types</li>
+                <li><strong>Lazy Loading:</strong> Large datasets that should be loaded on demand</li>
+            </ul>
+            
+            <h3>❌ Don't Use When:</h3>
+            <ul>
+                <li><strong>Simple Arrays:</strong> Direct access is more efficient</li>
+                <li><strong>Performance Critical:</strong> Every nanosecond counts</li>
+                <li><strong>Single Use:</strong> Collection accessed only once</li>
+                <li><strong>Built-in Iterators Available:</strong> Use STL iterators instead</li>
+            </ul>
+        </div>
+
+        <h2>🔍 Real-World Examples</h2>
+        
+        <div class="real-world-example">
+            <h3>1. 📁 File System Directory Traversal</h3>
+            <p><strong>Scenario:</strong> Navigate through folder structures</p>
+            <ul>
+                <li><strong>DepthFirstIterator:</strong> Goes deep into subdirectories first</li>
+                <li><strong>BreadthFirstIterator:</strong> Processes all files in current level first</li>
+                <li><strong>FilteredIterator:</strong> Only shows specific file types (*.jpg, *.txt)</li>
+                <li><strong>SizeFilterIterator:</strong> Only shows files above/below certain size</li>
+            </ul>
+        </div>
+
+        <div class="real-world-example">
+            <h3>2. 🎵 Music Playlist Player</h3>
+            <p><strong>Scenario:</strong> Different ways to play songs</p>
+            <ul>
+                <li><strong>SequentialIterator:</strong> Play songs in order</li>
+                <li><strong>ShuffleIterator:</strong> Random song order</li>
+                <li><strong>GenreFilterIterator:</strong> Only play rock songs</li>
+                <li><strong>RepeatIterator:</strong> Loop through the same song/playlist</li>
+            </ul>
+        </div>
+
+        <div class="real-world-example">
+            <h3>3. 🌐 Web Scraping Results</h3>
+            <p><strong>Scenario:</strong> Process large search results</p>
+            <ul>
+                <li><strong>LazyIterator:</strong> Load results page by page</li>
+                <li><strong>RelevanceIterator:</strong> Sort by relevance score</li>
+                <li><strong>DateIterator:</strong> Newest/oldest first</li>
+                <li><strong>DomainFilterIterator:</strong> Results from specific websites only</li>
+            </ul>
+        </div>
+
+        <h2>🎤 Interview Questions & Answers</h2>
+        
+        <div class="interview-section">
+            <h3>Q1: What is the Iterator pattern and why is it useful?</h3>
+            <p><strong>Answer:</strong> The Iterator pattern provides a way to access elements of a collection sequentially without exposing the underlying structure. It's useful because it decouples the client code from the collection implementation, allows multiple traversal strategies, and provides a uniform interface for different collection types.</p>
+            
+            <h3>Q2: How is Iterator pattern different from just using a for loop?</h3>
+            <p><strong>Answer:</strong> A for loop requires knowing the collection's internal structure (like size and indexing). Iterator pattern hides these details and provides methods like hasNext() and next(). You can also have multiple iterators with different behaviors (reverse, filtered, etc.) on the same collection.</p>
+            
+            <h3>Q3: What are the main components of Iterator pattern?</h3>
+            <p><strong>Answer:</strong></p>
+            <ul>
+                <li><strong>Iterator Interface:</strong> Defines traversal methods (next, hasNext, first)</li>
+                <li><strong>Concrete Iterator:</strong> Implements the traversal logic</li>
+                <li><strong>Aggregate Interface:</strong> Defines method to create iterator</li>
+                <li><strong>Concrete Aggregate:</strong> Collection that creates appropriate iterator</li>
+            </ul>
+            
+            <h3>Q4: Can you have multiple iterators on the same collection?</h3>
+            <p><strong>Answer:</strong> Yes! That's one of the key benefits. You can have multiple iterator objects traversing the same collection independently. For example, one iterator going forward, another going backward, and a third one filtering by price range - all on the same product collection.</p>
+            
+            <h3>Q5: What's the difference between internal and external iterators?</h3>
+            <p><strong>Answer:</strong></p>
+            <ul>
+                <li><strong>External Iterator:</strong> Client controls iteration (like our example with next/hasNext)</li>
+                <li><strong>Internal Iterator:</strong> Collection controls iteration (like forEach methods)</li>
+                <li><strong>External:</strong> More flexible, client decides when to stop</li>
+                <li><strong>Internal:</strong> Simpler to use, but less control</li>
+            </ul>
+
+            <h3>Q6: How does Iterator pattern relate to C++ STL?</h3>
+            <p><strong>Answer:</strong> C++ STL extensively uses iterator pattern! STL containers (vector, list, map) provide begin() and end() iterators. You can use them like: <code>for(auto it = vec.begin(); it != vec.end(); ++it)</code>. The pattern we implemented is similar but more explicit about the interface.</p>
+        </div>
+
+        <h2>🚀 Advanced Tips & Best Practices</h2>
+        
+        <div class="key-point">
+            <h3>💡 Pro Implementation Tips:</h3>
+            
+            <h4>1. Use Smart Pointers</h4>
+            <div class="code-block">
+<pre><span class="code-keyword">#include</span> &lt;memory&gt;
+
+<span class="code-keyword">std::unique_ptr&lt;Iterator&gt;</span> createIterator() {
+    <span class="code-keyword">return</span> <span class="code-keyword">std::make_unique&lt;ProductIterator&gt;</span>(products);
+}
+
+<span class="code-comment">// Usage - automatic cleanup!</span>
+<span class="code-keyword">auto</span> iterator = inventory.createIterator();
+<span class="code-comment">// No need to delete - RAII handles it</span>
+</pre>
+            </div>
+
+            <h4>2. Add Safety Checks</h4>
+            <div class="code-block">
+<pre>Product* next() {
+    <span class="code-keyword">if</span> (!hasNext()) {
+        <span class="code-keyword">throw</span> std::out_of_range(<span class="code-string">"No more elements"</span>);
+    }
+    <span class="code-keyword">return</span> products[++current];
+}
+</pre>
+            </div>
+
+            <h4>3. Support Range-based For Loops (C++11)</h4>
+            <div class="code-block">
+<pre><span class="code-keyword">class</span> Inventory {
+    <span class="code-keyword">public</span>:
+        <span class="code-comment">// Enable range-based for loops</span>
+        <span class="code-keyword">auto</span> begin() { <span class="code-keyword">return</span> products.begin(); }
+        <span class="code-keyword">auto</span> end() { <span class="code-keyword">return</span> products.end(); }
+};
+
+<span class="code-comment">// Usage</span>
+<span class="code-keyword">for</span> (<span class="code-keyword">const</span> <span class="code-keyword">auto</span>& product : inventory) {
+    cout << product->getName() << endl;
+}
+</pre>
+            </div>
+
+            <h4>4. Template-based Generic Iterator</h4>
+            <div class="code-block">
+<pre><span class="code-keyword">template</span>&lt;<span class="code-keyword">typename</span> T&gt;
+<span class="code-keyword">class</span> VectorIterator {
+    <span class="code-keyword">private</span>:
+        vector&lt;T&gt;& collection;
+        size_t current;
+    
+    <span class="code-keyword">public</span>:
+        VectorIterator(vector&lt;T&gt;& vec) : collection(vec), current(0) {}
+        
+        T* next() {
+            <span class="code-keyword">return</span> hasNext() ? &collection[++current] : <span class="code-keyword">nullptr</span>;
+        }
+        
+        <span class="code-keyword">bool</span> hasNext() {
+            <span class="code-keyword">return</span> current < collection.size();
+        }
+};
+</pre>
+            </div>
+        </div>
+
+        <h2>📝 Summary</h2>
+        
+        <div class="highlight-box">
+            <h3>🎯 Key Takeaways</h3>
+            <ul>
+                <li><strong>Purpose:</strong> Provide sequential access to collection elements without exposing structure</li>
+                <li><strong>Benefits:</strong> Encapsulation, multiple traversal methods, uniform interface</li>
+                <li><strong>Components:</strong> Iterator interface, concrete iterator, aggregate, concrete aggregate</li>
+                <li><strong>When to use:</strong> Complex collections, multiple traversal needs, hiding implementation</li>
+                <li><strong>Real-world:</strong> File systems, playlists, search results, database cursors</li>
+            </ul>
+            
+            <p><strong>Remember:</strong> Iterator is like a bookmark in a book - it remembers where you are and helps you navigate through content without caring about how the book is structured internally!</p>
+        </div>
+
+        <div style="text-align: center; margin: 40px 0;">
+            <a href="index.html" class="back-button">← Back to Design Patterns Index</a>
+        </div>
+
+        <footer style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 2px solid #ecf0f1; color: #7f8c8d;">
+            <p><strong>💡 Practice Tip:</strong> Try implementing different iterator types (reverse, filtered, etc.) to master the pattern!</p>
+            <p><strong>Made with ❤️ for Easy Learning</strong></p>
+        </footer>
+    </div>
+</body>
+</html> 
