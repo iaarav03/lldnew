@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UML Diagrams for LLD - Complete Guide with C++ Examples</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.8;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+            font-size: 16px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #0056b3;
+        }
+        h1 {
+            border-bottom: 3px solid #0056b3;
+            padding-bottom: 15px;
+            font-size: 2.2em;
+        }
+        h2 {
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 10px;
+            margin-top: 30px;
+            font-size: 1.5em;
+        }
+        h3 {
+            color: #007bff;
+            font-size: 1.2em;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        pre {
+            background: #f8f9fa;
+            color: #333;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 14px;
+            border: 1px solid #e9ecef;
+        }
+        pre code {
+            background: transparent;
+            color: #333;
+            padding: 0;
+        }
+        code {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            background: #f1f3f4;
+            padding: 2px 4px;
+            border-radius: 3px;
+            color: #333;
+        }
+        ul, ol {
+            padding-left: 25px;
+        }
+        li {
+            margin-bottom: 12px;
+        }
+        strong {
+            color: #d73a49;
+            font-weight: 600;
+        }
+        .example {
+            border-left: 4px solid #007bff;
+            padding: 20px;
+            margin: 20px 0;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        .simple-explanation {
+            background-color: #e7f3ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            border-left: 4px solid #2196F3;
+        }
+        .uml-diagram {
+            background-color: #f0f8ff;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 15px 0;
+            border-left: 4px solid #4169e1;
+            text-align: center;
+            font-family: monospace;
+        }
+        .relationship-example {
+            background-color: #f5f5dc;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            border-left: 4px solid #daa520;
+        }
+        .interview-tip {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            border-left: 4px solid #ffc107;
+        }
+        .navigation {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .navigation a {
+            color: #0056b3;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 5px 10px;
+            border-radius: 3px;
+            background-color: #fff;
+        }
+        .navigation a:hover {
+            background-color: #0056b3;
+            color: #fff;
+        }
+        .relationship-header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .relationship-header h3 {
+            color: #ffffff !important;
+            margin: 0;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        .comparison-table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        .comparison-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .uml-symbol {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #007bff;
+        }
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #666;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="navigation">
+            <a href="index.html">Home</a>
+            <a href="Design_Patterns_Index.html">Design Patterns</a>
+            <a href="#introduction">UML Basics</a>
+            <a href="#relationships">Relationships</a>
+            <a href="#is-a">Is-A</a>
+            <a href="#has-a">Has-A</a>
+            <a href="#aggregation">Aggregation</a>
+            <a href="#composition">Composition</a>
+        </div>
+
+        <h1>📊 UML Diagrams for Low Level Design - Complete Guide</h1>
+
+        <div class="simple-explanation">
+            <h3>🎯 What is UML?</h3>
+            <p><strong>UML (Unified Modeling Language)</strong> is a standardized visual language for modeling software systems. Think of it as the <strong>"blueprint"</strong> for your code - just like architects use blueprints for buildings!</p>
+            
+            <p><strong>Why UML in Interviews?</strong></p>
+            <ul>
+                <li>🎨 <strong>Visual Communication:</strong> Explain your design clearly</li>
+                <li>🏗️ <strong>System Architecture:</strong> Show how components interact</li>
+                <li>🤝 <strong>Relationships:</strong> Demonstrate understanding of object relationships</li>
+                <li>💼 <strong>Industry Standard:</strong> Used everywhere in software development</li>
+            </ul>
+        </div>
+
+        <div class="interview-tip">
+            <h3>💡 LLD Interview Success Tips</h3>
+            <ul>
+                <li><strong>Start with Classes:</strong> Identify main entities first</li>
+                <li><strong>Define Relationships:</strong> Is-A, Has-A, Uses relationships</li>
+                <li><strong>Show Multiplicity:</strong> One-to-one, one-to-many, many-to-many</li>
+                <li><strong>Use Proper Notation:</strong> Lines, arrows, symbols matter!</li>
+                <li><strong>Explain Your Thinking:</strong> Walk through your design decisions</li>
+            </ul>
+        </div>
+
+        <!-- Introduction to UML -->
+        <h2 id="introduction">📚 UML Class Diagram Basics</h2>
+
+        <div class="simple-explanation">
+            <h3>🧱 What's in a UML Class?</h3>
+            <p>A UML class is represented as a rectangle divided into three sections:</p>
+            <ol>
+                <li><strong>Class Name</strong> (top section)</li>
+                <li><strong>Attributes/Fields</strong> (middle section)</li>
+                <li><strong>Methods/Operations</strong> (bottom section)</li>
+            </ol>
+        </div>
+
+        <div class="uml-diagram">
+            <h3>📐 Basic UML Class Structure</h3>
+            <pre>
+┌─────────────────────┐
+│      ClassName      │  ← Class name (bold, centered)
+├─────────────────────┤
+│ - privateField      │  ← Attributes with visibility
+│ + publicField       │
+│ # protectedField    │
+├─────────────────────┤
+│ + publicMethod()    │  ← Methods with visibility
+│ - privateMethod()   │
+│ # protectedMethod() │
+└─────────────────────┘
+            </pre>
+        </div>
+
+        <div class="example">
+            <h3>🔍 Visibility Symbols</h3>
+            <ul>
+                <li><span class="uml-symbol">+</span> <strong>Public:</strong> Accessible from anywhere</li>
+                <li><span class="uml-symbol">-</span> <strong>Private:</strong> Only within the same class</li>
+                <li><span class="uml-symbol">#</span> <strong>Protected:</strong> Within class and subclasses</li>
+                <li><span class="uml-symbol">~</span> <strong>Package:</strong> Within the same package/namespace</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h3>📝 Real Example: Car Class in UML</h3>
+            <div class="uml-diagram">
+                <pre>
+┌─────────────────────┐
+│        Car          │
+├─────────────────────┤
+│ - brand: string     │
+│ - model: string     │
+│ - year: int         │
+│ + speed: double     │
+├─────────────────────┤
+│ + startEngine()     │
+│ + accelerate()      │
+│ + brake()           │
+│ - checkFuel()       │
+└─────────────────────┘
+                </pre>
+            </div>
+
+            <p><strong>Corresponding C++ Code:</strong></p>
+            <pre><code>class Car {
+private:
+    string brand;      // - private
+    string model;      // - private  
+    int year;          // - private
+    bool checkFuel();  // - private method
+    
+public:
+    double speed;      // + public
+    
+    void startEngine(); // + public method
+    void accelerate();  // + public method
+    void brake();       // + public method
+};</code></pre>
+        </div>
+
+        <!-- Relationships Overview -->
+        <h2 id="relationships">🔗 UML Relationships - The Heart of Design</h2>
+
+        <div class="simple-explanation">
+            <h3>🤔 Why Relationships Matter?</h3>
+            <p>In real software, classes don't exist in isolation. They <strong>interact, depend on, and contain</strong> each other. Understanding these relationships is crucial for:</p>
+            <ul>
+                <li>📈 <strong>Scalable Design:</strong> How your system grows</li>
+                <li>🔧 <strong>Maintainability:</strong> How easy it is to modify</li>
+                <li>🧪 <strong>Testability:</strong> How to unit test components</li>
+                <li>🔄 <strong>Reusability:</strong> How to reuse components</li>
+            </ul>
+        </div>
+
+        <div class="comparison-table">
+            <table class="comparison-table">
+                <tr>
+                    <th>Relationship</th>
+                    <th>UML Symbol</th>
+                    <th>Meaning</th>
+                    <th>C++ Example</th>
+                </tr>
+                <tr>
+                    <td><strong>Is-A (Inheritance)</strong></td>
+                    <td>──▷ (open triangle)</td>
+                    <td>"Child is a type of Parent"</td>
+                    <td>class Dog : public Animal</td>
+                </tr>
+                <tr>
+                    <td><strong>Has-A (Composition)</strong></td>
+                    <td>──♦ (filled diamond)</td>
+                    <td>"Owner owns and controls part"</td>
+                    <td>Car contains Engine (strong)</td>
+                </tr>
+                <tr>
+                    <td><strong>Uses (Aggregation)</strong></td>
+                    <td>──♢ (hollow diamond)</td>
+                    <td>"Uses but doesn't own"</td>
+                    <td>Student uses Library (weak)</td>
+                </tr>
+                <tr>
+                    <td><strong>Association</strong></td>
+                    <td>──── (simple line)</td>
+                    <td>"Knows about and uses"</td>
+                    <td>Person knows Address</td>
+                </tr>
+                <tr>
+                    <td><strong>Dependency</strong></td>
+                    <td>- - -▷ (dashed arrow)</td>
+                    <td>"Temporarily uses"</td>
+                    <td>Method parameter/return</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- IS-A Relationship -->
+        <h2 id="is-a">🧬 IS-A Relationship (Inheritance)</h2>
+
+        <div class="relationship-header">
+            <h3>"A Dog IS-A Animal" - Inheritance Relationship</h3>
+        </div>
+
+        <div class="simple-explanation">
+            <h3>🤔 What is IS-A?</h3>
+            <p>IS-A represents <strong>inheritance</strong>. It means the child class <strong>"is a specialized version"</strong> of the parent class. Think of it like family relationships:</p>
+            <ul>
+                <li>🐕 A Dog <strong>IS-A</strong> Animal</li>
+                <li>🚗 A Car <strong>IS-A</strong> Vehicle</li>
+                <li>👨‍🎓 A Student <strong>IS-A</strong> Person</li>
+            </ul>
+        </div>
+
+        <div class="uml-diagram">
+            <h3>📐 UML Notation for IS-A</h3>
+            <pre>
+        Animal
+    ┌─────────────┐
+    │   Animal    │
+    ├─────────────┤
+    │ + name      │
+    │ + age       │
+    ├─────────────┤
+    │ + eat()     │
+    │ + sleep()   │
+    └─────────────┘
+           △
+           │ IS-A (inheritance)
+           │ ──▷ (open triangle arrow)
+           │
+    ┌─────────────┐
+    │     Dog     │
+    ├─────────────┤
+    │ + breed     │
+    ├─────────────┤
+    │ + bark()    │
+    │ + wagTail() │
+    └─────────────┘
+            </pre>
+        </div>
+
+        <div class="example">
+            <h3>💻 C++ Implementation of IS-A</h3>
+            <pre><code>// Base class (Parent)
+class Animal {
+protected:
+    string name;
+    int age;
+    
+public:
+    Animal(const string& n, int a) : name(n), age(a) {}
+    
+    // Virtual functions for polymorphism
+    virtual void eat() {
+        cout << name << " is eating." << endl;
+    }
+    
+    virtual void sleep() {
+        cout << name << " is sleeping." << endl;
+    }
+    
+    virtual void makeSound() = 0; // Pure virtual (abstract)
+    
+    virtual ~Animal() = default;
+};
+
+// Derived class (Child) - Dog IS-A Animal
+class Dog : public Animal {
+private:
+    string breed;
+    
+public:
+    Dog(const string& n, int a, const string& b) 
+        : Animal(n, a), breed(b) {}
+    
+    // Override parent methods
+    void makeSound() override {
+        cout << name << " says: Woof! Woof!" << endl;
+    }
+    
+    // Dog-specific methods
+    void bark() {
+        cout << name << " is barking loudly!" << endl;
+    }
+    
+    void wagTail() {
+        cout << name << " is wagging tail happily!" << endl;
+    }
+    
+    string getBreed() const { return breed; }
+};
+
+// Another derived class
+class Cat : public Animal {
+public:
+    Cat(const string& n, int a) : Animal(n, a) {}
+    
+    void makeSound() override {
+        cout << name << " says: Meow! Meow!" << endl;
+    }
+    
+    void purr() {
+        cout << name << " is purring contentedly." << endl;
+    }
+};
+
+// Usage demonstrating polymorphism
+int main() {
+    // Creating objects
+    Dog myDog("Buddy", 3, "Golden Retriever");
+    Cat myCat("Whiskers", 2);
+    
+    // Using IS-A relationship - Dog IS-A Animal
+    Animal* animals[] = {&myDog, &myCat};
+    
+    cout << "=== Polymorphic behavior ===" << endl;
+    for (Animal* animal : animals) {
+        animal->eat();        // Inherited from Animal
+        animal->makeSound();  // Polymorphic call
+        animal->sleep();      // Inherited from Animal
+        cout << endl;
+    }
+    
+    cout << "=== Dog-specific behavior ===" << endl;
+    myDog.bark();      // Dog-specific method
+    myDog.wagTail();   // Dog-specific method
+    cout << "Breed: " << myDog.getBreed() << endl;
+    
+    return 0;
+}</code></pre>
+        </div>
+
+        <div class="interview-tip">
+            <h3>📝 IS-A Interview Questions</h3>
+            <ul>
+                <li><strong>Q:</strong> "When would you use inheritance?"<br>
+                    <strong>A:</strong> When there's a clear "is-a" relationship and you want to share common behavior</li>
+                <li><strong>Q:</strong> "What's the difference between public, private, and protected inheritance?"<br>
+                    <strong>A:</strong> Controls access levels and IS-A relationship visibility</li>
+                <li><strong>Q:</strong> "Why use virtual functions?"<br>
+                    <strong>A:</strong> For runtime polymorphism - correct method called based on actual object type</li>
+            </ul>
+        </div>
+
+        <!-- HAS-A Relationship -->
+        <h2 id="has-a">🏠 HAS-A Relationship (Composition & Aggregation)</h2>
+
+        <div class="relationship-header">
+            <h3>"A Car HAS-A Engine" - Ownership Relationship</h3>
+        </div>
+
+        <div class="simple-explanation">
+            <h3>🤔 What is HAS-A?</h3>
+            <p>HAS-A represents <strong>ownership or containment</strong>. One class <strong>"has" or "contains"</strong> another class as a member. There are two types:</p>
+            <ul>
+                <li>💪 <strong>Composition (Strong HAS-A):</strong> Owner controls lifetime</li>
+                <li>🤝 <strong>Aggregation (Weak HAS-A):</strong> Owner uses but doesn't control lifetime</li>
+            </ul>
+        </div>
+
+        <!-- Composition -->
+        <h3 id="composition">💪 Composition - Strong HAS-A</h3>
+
+        <div class="relationship-example">
+            <h3>🔧 Composition Characteristics</h3>
+            <ul>
+                <li><strong>Ownership:</strong> Parent owns and controls child's lifecycle</li>
+                <li><strong>Lifetime:</strong> Child cannot exist without parent</li>
+                <li><strong>Example:</strong> Car HAS-A Engine, House HAS-A Room</li>
+                <li><strong>UML Symbol:</strong> Filled diamond (♦)</li>
+            </ul>
+        </div>
+
+        <div class="uml-diagram">
+            <h3>📐 UML Composition Notation</h3>
+            <pre>
+    ┌─────────────┐       ♦ ──────── ┌─────────────┐
+    │     Car     │       │          │   Engine    │
+    ├─────────────┤       │          ├─────────────┤
+    │ - brand     │       │          │ - horsepower│
+    │ - model     │       │          │ - fuelType  │
+    ├─────────────┤  Composition     ├─────────────┤
+    │ + start()   │   (filled ♦)     │ + start()   │
+    │ + stop()    │       │          │ + stop()    │
+    └─────────────┘       │          └─────────────┘
+                         
+    "Car HAS-A Engine" (Car owns and controls Engine)
+            </pre>
+        </div>
+
+        <div class="example">
+            <h3>💻 C++ Implementation of Composition</h3>
+            <pre><code>// Child class - Engine
+class Engine {
+private:
+    int horsepower;
+    string fuelType;
+    bool isRunning;
+    
+public:
+    Engine(int hp, const string& fuel) 
+        : horsepower(hp), fuelType(fuel), isRunning(false) {
+        cout << "Engine created with " << hp << " HP (" << fuel << ")" << endl;
+    }
+    
+    ~Engine() {
+        cout << "Engine destroyed" << endl;
+    }
+    
+    void start() {
+        if (!isRunning) {
+            isRunning = true;
+            cout << "Engine started! Vroom vroom!" << endl;
+        }
+    }
+    
+    void stop() {
+        if (isRunning) {
+            isRunning = false;
+            cout << "Engine stopped." << endl;
+        }
+    }
+    
+    bool getRunningStatus() const { return isRunning; }
+    int getHorsepower() const { return horsepower; }
+};
+
+// Parent class - Car (HAS-A Engine)
+class Car {
+private:
+    string brand;
+    string model;
+    Engine engine;  // Composition: Car HAS-A Engine
+    
+public:
+    // Engine is created when Car is created (composition)
+    Car(const string& b, const string& m, int hp, const string& fuel)
+        : brand(b), model(m), engine(hp, fuel) {  // Engine constructed here
+        cout << "Car created: " << brand << " " << model << endl;
+    }
+    
+    // Engine is automatically destroyed when Car is destroyed
+    ~Car() {
+        cout << "Car destroyed: " << brand << " " << model << endl;
+    }
+    
+    void startCar() {
+        cout << "Starting " << brand << " " << model << "..." << endl;
+        engine.start();  // Delegating to engine
+        if (engine.getRunningStatus()) {
+            cout << "Car is ready to drive!" << endl;
+        }
+    }
+    
+    void stopCar() {
+        cout << "Stopping " << brand << " " << model << "..." << endl;
+        engine.stop();   // Delegating to engine
+        cout << "Car stopped." << endl;
+    }
+    
+    void displayInfo() const {
+        cout << "Car: " << brand << " " << model 
+             << " (Engine: " << engine.getHorsepower() << " HP)" << endl;
+    }
+};
+
+int main() {
+    cout << "=== Composition Example ===" << endl;
+    
+    {  // Scope to demonstrate lifecycle
+        Car myCar("Toyota", "Camry", 200, "Gasoline");
+        myCar.displayInfo();
+        
+        myCar.startCar();
+        cout << "Driving around..." << endl;
+        myCar.stopCar();
+        
+        cout << "End of scope - Car will be destroyed..." << endl;
+    } // Car destructor called -> Engine destructor called automatically
+    
+    cout << "After scope - both Car and Engine are destroyed" << endl;
+    return 0;
+}</code></pre>
+        </div>
+
+        <!-- Aggregation -->
+        <h3 id="aggregation">🤝 Aggregation - Weak HAS-A</h3>
+
+        <div class="relationship-example">
+            <h3>📚 Aggregation Characteristics</h3>
+            <ul>
+                <li><strong>Usage:</strong> Parent uses child but doesn't own it</li>
+                <li><strong>Lifetime:</strong> Child can exist independently of parent</li>
+                <li><strong>Example:</strong> Student HAS-A Address, Team HAS-A Player</li>
+                <li><strong>UML Symbol:</strong> Hollow diamond (♢)</li>
+            </ul>
+        </div>
+
+        <div class="uml-diagram">
+            <h3>📐 UML Aggregation Notation</h3>
+            <pre>
+    ┌─────────────┐       ♢ ──────── ┌─────────────┐
+    │  University │       │          │   Student   │
+    ├─────────────┤       │          ├─────────────┤
+    │ - name      │       │          │ - name      │
+    │ - location  │       │          │ - id        │
+    ├─────────────┤   Aggregation    ├─────────────┤
+    │ + enroll()  │   (hollow ♢)     │ + study()   │
+    │ + graduate()│       │          │ + takeExam()│
+    └─────────────┘       │          └─────────────┘
+                         
+    "University HAS-A Student" (University uses Student, but Student can exist independently)
+            </pre>
+        </div>
+
+        <div class="example">
+            <h3>💻 C++ Implementation of Aggregation</h3>
+            <pre><code>// Independent class - Student
+class Student {
+private:
+    string name;
+    int id;
+    string major;
+    
+public:
+    Student(const string& n, int studentId, const string& m) 
+        : name(n), id(studentId), major(m) {
+        cout << "Student created: " << name << " (ID: " << id << ")" << endl;
+    }
+    
+    ~Student() {
+        cout << "Student destroyed: " << name << endl;
+    }
+    
+    void study() {
+        cout << name << " is studying " << major << endl;
+    }
+    
+    void takeExam() {
+        cout << name << " is taking an exam" << endl;
+    }
+    
+    string getName() const { return name; }
+    int getId() const { return id; }
+    string getMajor() const { return major; }
+};
+
+// Class that aggregates students
+class University {
+private:
+    string name;
+    string location;
+    vector<Student*> students;  // Aggregation: pointers to existing students
+    
+public:
+    University(const string& n, const string& loc) 
+        : name(n), location(loc) {
+        cout << "University created: " << name << endl;
+    }
+    
+    ~University() {
+        cout << "University destroyed: " << name << endl;
+        // Note: We don't delete students - they exist independently!
+        cout << "Students continue to exist after university is destroyed" << endl;
+    }
+    
+    // Enroll an existing student (aggregation)
+    void enrollStudent(Student* student) {
+        if (student) {
+            students.push_back(student);
+            cout << "Student " << student->getName() 
+                 << " enrolled at " << name << endl;
+        }
+    }
+    
+    void removeStudent(int studentId) {
+        auto it = remove_if(students.begin(), students.end(),
+            [studentId](Student* s) { return s->getId() == studentId; });
+        
+        if (it != students.end()) {
+            cout << "Student with ID " << studentId 
+                 << " removed from " << name << endl;
+            students.erase(it, students.end());
+        }
+    }
+    
+    void conductClass() {
+        cout << "\n=== Class in session at " << name << " ===" << endl;
+        for (Student* student : students) {
+            student->study();
+        }
+    }
+    
+    void displayInfo() const {
+        cout << "\n" << name << " (" << location << ")" << endl;
+        cout << "Enrolled students: " << students.size() << endl;
+        for (const Student* student : students) {
+            cout << "  - " << student->getName() 
+                 << " (ID: " << student->getId() 
+                 << ", Major: " << student->getMajor() << ")" << endl;
+        }
+    }
+};
+
+int main() {
+    cout << "=== Aggregation Example ===" << endl;
+    
+    // Create students independently
+    Student* alice = new Student("Alice Johnson", 1001, "Computer Science");
+    Student* bob = new Student("Bob Smith", 1002, "Mathematics");
+    Student* charlie = new Student("Charlie Brown", 1003, "Physics");
+    
+    {  // University scope
+        University mit("MIT", "Cambridge, MA");
+        
+        // Enroll existing students (aggregation)
+        mit.enrollStudent(alice);
+        mit.enrollStudent(bob);
+        mit.enrollStudent(charlie);
+        
+        mit.displayInfo();
+        mit.conductClass();
+        
+        // Remove a student (but student still exists)
+        mit.removeStudent(1002);
+        mit.displayInfo();
+        
+        cout << "\nUniversity scope ending..." << endl;
+    } // University destroyed, but students still exist!
+    
+    cout << "\nAfter university destruction:" << endl;
+    alice->study();    // Students still exist and work!
+    charlie->study();
+    
+    // Manual cleanup (in real app, use smart pointers)
+    delete alice;
+    delete bob;
+    delete charlie;
+    
+    return 0;
+}</code></pre>
+        </div>
+
+        <!-- Comparison Table -->
+        <h3>🔍 Composition vs Aggregation - Key Differences</h3>
+
+        <table class="comparison-table">
+            <tr>
+                <th>Aspect</th>
+                <th>Composition (♦)</th>
+                <th>Aggregation (♢)</th>
+            </tr>
+            <tr>
+                <td><strong>Relationship Strength</strong></td>
+                <td>Strong "owns"</td>
+                <td>Weak "uses"</td>
+            </tr>
+            <tr>
+                <td><strong>Lifetime Dependency</strong></td>
+                <td>Child dies with parent</td>
+                <td>Child exists independently</td>
+            </tr>
+            <tr>
+                <td><strong>Memory Management</strong></td>
+                <td>Parent creates/destroys child</td>
+                <td>Child created elsewhere</td>
+            </tr>
+            <tr>
+                <td><strong>C++ Implementation</strong></td>
+                <td>Member object or unique_ptr</td>
+                <td>Pointer or reference</td>
+            </tr>
+            <tr>
+                <td><strong>Real-world Example</strong></td>
+                <td>House has Rooms</td>
+                <td>Library has Books</td>
+            </tr>
+            <tr>
+                <td><strong>UML Symbol</strong></td>
+                <td>Filled diamond ♦</td>
+                <td>Hollow diamond ♢</td>
+            </tr>
+        </table>
+
+        <!-- Association and Dependency -->
+        <h2>🔗 Other Important Relationships</h2>
+
+        <h3>📞 Association - "Uses/Knows About"</h3>
+        
+        <div class="relationship-example">
+            <p><strong>Association</strong> is a general relationship where one class knows about and uses another, but there's no ownership.</p>
+            <p><strong>Example:</strong> Person ──── Address (Person has an address, but address can exist without person)</p>
+        </div>
+
+        <div class="example">
+            <h3>💻 Association Example</h3>
+            <pre><code>class Address {
+public:
+    string street, city, zipCode;
+    
+    Address(const string& s, const string& c, const string& z)
+        : street(s), city(c), zipCode(z) {}
+    
+    string getFullAddress() const {
+        return street + ", " + city + " " + zipCode;
+    }
+};
+
+class Person {
+private:
+    string name;
+    Address* homeAddress;  // Association (pointer to existing address)
+    
+public:
+    Person(const string& n) : name(n), homeAddress(nullptr) {}
+    
+    void setAddress(Address* addr) {
+        homeAddress = addr;  // Associate with existing address
+    }
+    
+    void displayInfo() const {
+        cout << "Name: " << name << endl;
+        if (homeAddress) {
+            cout << "Address: " << homeAddress->getFullAddress() << endl;
+        }
+    }
+};</code></pre>
+        </div>
+
+        <h3>⚡ Dependency - "Temporarily Uses"</h3>
+        
+        <div class="relationship-example">
+            <p><strong>Dependency</strong> is the weakest relationship - one class temporarily uses another (usually as parameter or return type).</p>
+            <p><strong>UML Symbol:</strong> Dashed arrow - - -▷</p>
+        </div>
+
+        <div class="example">
+            <h3>💻 Dependency Example</h3>
+            <pre><code>class EmailService {
+public:
+    void sendEmail(const string& message) {
+        cout << "Sending: " << message << endl;
+    }
+};
+
+class NotificationManager {
+public:
+    // Dependency: temporarily uses EmailService
+    void sendWelcomeNotification(EmailService& emailService, const string& userName) {
+        string message = "Welcome " + userName + "!";
+        emailService.sendEmail(message);  // Temporary usage
+    }
+    // EmailService not stored as member - just used temporarily
+};</code></pre>
+        </div>
+
+        <!-- Multiplicity -->
+        <h2>📊 Multiplicity in UML</h2>
+
+        <div class="simple-explanation">
+            <h3>🔢 What is Multiplicity?</h3>
+            <p><strong>Multiplicity</strong> shows how many instances of one class relate to instances of another class. It's written near the ends of relationship lines.</p>
+        </div>
+
+        <div class="uml-diagram">
+            <h3>📐 Common Multiplicity Notations</h3>
+            <pre>
+1        Exactly one
+0..1     Zero or one
+1..*     One or more  
+*        Zero or more (any number)
+2..5     Between 2 and 5
+5        Exactly 5
+
+Example:
+    Student ──────────── University
+       *      studies at     1
+    
+"Many students study at one university"
+            </pre>
+        </div>
+
+        <div class="example">
+            <h3>🎓 Multiplicity Example: Student-Course System</h3>
+            <pre><code>class Course {
+private:
+    string courseName;
+    string courseCode;
+    vector<Student*> enrolledStudents;  // * (many students)
+    
+public:
+    Course(const string& name, const string& code) 
+        : courseName(name), courseCode(code) {}
+    
+    void enrollStudent(Student* student) {
+        enrolledStudents.push_back(student);
+    }
+    
+    void displayEnrollment() const {
+        cout << "Course: " << courseName << " (" << courseCode << ")" << endl;
+        cout << "Enrolled students: " << enrolledStudents.size() << endl;
+    }
+};
+
+class Student {
+private:
+    string name;
+    int id;
+    vector<Course*> courses;  // * (many courses)
+    
+public:
+    Student(const string& n, int studentId) : name(n), id(studentId) {}
+    
+    void enrollInCourse(Course* course) {
+        courses.push_back(course);
+        course->enrollStudent(this);  // Bidirectional relationship
+    }
+    
+    void displayCourses() const {
+        cout << name << " is enrolled in " << courses.size() << " courses" << endl;
+    }
+};
+
+// Many-to-many relationship: Student * ──── * Course</code></pre>
+        </div>
+
+        <!-- Interview Section -->
+        <h2>💼 LLD Interview Scenarios</h2>
+
+        <div class="interview-tip">
+            <h3>🎯 Common UML Questions in Interviews</h3>
+            <ol>
+                <li><strong>"Design a Library Management System"</strong>
+                    <ul>
+                        <li>Library HAS-A Books (aggregation)</li>
+                        <li>Member borrows Books (association)</li>
+                        <li>Book HAS-A Author (composition or association)</li>
+                    </ul>
+                </li>
+                <li><strong>"Design a Car Rental System"</strong>
+                    <ul>
+                        <li>Car IS-A Vehicle (inheritance)</li>
+                        <li>RentalCompany HAS-A Cars (aggregation)</li>
+                        <li>Customer rents Car (association)</li>
+                    </ul>
+                </li>
+                <li><strong>"Design a Social Media Platform"</strong>
+                    <ul>
+                        <li>User HAS-A Posts (composition)</li>
+                        <li>User follows User (self-association)</li>
+                        <li>Post HAS-A Comments (composition)</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <div class="example">
+            <h3>🚗 Complete Example: Car Rental System UML</h3>
+            <div class="uml-diagram">
+                <pre>
+                Vehicle
+            ┌─────────────┐
+            │   Vehicle   │
+            ├─────────────┤
+            │ - id        │
+            │ - brand     │
+            ├─────────────┤
+            │ + start()   │
+            │ + stop()    │
+            └─────────────┘
+                   △
+                   │ IS-A
+    ┌──────────────┼──────────────┐
+    │              │              │
+┌───────────┐ ┌───────────┐ ┌───────────┐
+│    Car    │ │   Truck   │ │    Bus    │
+├───────────┤ ├───────────┤ ├───────────┤
+│- doors:int│ │- capacity │ │- seats    │
+├───────────┤ ├───────────┤ ├───────────┤
+│+ openDoor()│ │+ loadCargo│ │+ openBus()│
+└───────────┘ └───────────┘ └───────────┘
+
+RentalCompany ◇──────────* Vehicle
+     │                   (aggregation)
+     │
+     │ manages
+     │
+     ▼
+  Customer ────────── Rental ◆────────── Vehicle
+    1    rents    1..* rental  contains   1
+                      (association)    (composition)
+                </pre>
+            </div>
+        </div>
+
+        <div class="example">
+            <h3>💻 Partial C++ Implementation</h3>
+            <pre><code>// Base class
+class Vehicle {
+protected:
+    string id, brand;
+public:
+    virtual void start() = 0;
+    virtual ~Vehicle() = default;
+};
+
+// IS-A relationship
+class Car : public Vehicle {
+private:
+    int doors;
+public:
+    void start() override { cout << "Car engine started" << endl; }
+    void openDoor() { cout << "Door opened" << endl; }
+};
+
+// HAS-A (Composition) - Rental owns vehicle reference
+class Rental {
+private:
+    Vehicle* vehicle;  // Strong association
+    Customer* customer;
+    Date startDate, endDate;
+public:
+    Rental(Vehicle* v, Customer* c) : vehicle(v), customer(c) {}
+    // Rental controls the rental relationship
+};
+
+// HAS-A (Aggregation) - Company uses vehicles
+class RentalCompany {
+private:
+    vector<Vehicle*> fleet;  // Company has vehicles but doesn't own their lifecycle
+    vector<Rental*> activeRentals;  // Company manages rentals (composition)
+public:
+    void addVehicle(Vehicle* v) { fleet.push_back(v); }
+    Rental* createRental(Vehicle* v, Customer* c) {
+        return new Rental(v, c);  // Company creates rental
+    }
+};</code></pre>
+        </div>
+
+        <!-- Summary -->
+        <h2>📝 UML Quick Reference Summary</h2>
+
+        <div class="simple-explanation">
+            <h3>🎯 Key Takeaways for LLD Interviews</h3>
+            <ol>
+                <li><strong>Start Simple:</strong> Identify main classes first</li>
+                <li><strong>Choose Right Relationships:</strong> IS-A for inheritance, HAS-A for containment</li>
+                <li><strong>Show Multiplicity:</strong> How many of each class relate to others</li>
+                <li><strong>Use Proper Notation:</strong> Symbols matter in technical discussions</li>
+                <li><strong>Explain Your Decisions:</strong> Why you chose each relationship type</li>
+            </ol>
+        </div>
+
+        <div class="comparison-table">
+            <table class="comparison-table">
+                <tr>
+                    <th>When to Use</th>
+                    <th>Relationship</th>
+                    <th>C++ Pattern</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td>Shared behavior, polymorphism</td>
+                    <td>IS-A (Inheritance)</td>
+                    <td>class Child : public Parent</td>
+                    <td>Dog IS-A Animal</td>
+                </tr>
+                <tr>
+                    <td>Strong ownership, control lifecycle</td>
+                    <td>Composition</td>
+                    <td>Member object, unique_ptr</td>
+                    <td>Car HAS-A Engine</td>
+                </tr>
+                <tr>
+                    <td>Uses but doesn't own</td>
+                    <td>Aggregation</td>
+                    <td>Pointer, reference, shared_ptr</td>
+                    <td>Team HAS-A Players</td>
+                </tr>
+                <tr>
+                    <td>General relationship</td>
+                    <td>Association</td>
+                    <td>Reference, pointer</td>
+                    <td>Person knows Address</td>
+                </tr>
+                <tr>
+                    <td>Temporary usage</td>
+                    <td>Dependency</td>
+                    <td>Parameter, return type</td>
+                    <td>Method uses Logger</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="interview-tip">
+            <h3>🚀 Pro Tips for Success</h3>
+            <ul>
+                <li><strong>Practice Drawing:</strong> Get comfortable with UML symbols</li>
+                <li><strong>Think in Objects:</strong> Real-world entities become classes</li>
+                <li><strong>Consider Lifecycle:</strong> Who creates/destroys objects?</li>
+                <li><strong>Start High-Level:</strong> Main relationships first, details later</li>
+                <li><strong>Validate Design:</strong> Can it handle the requirements?</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>📊 <strong>UML Diagrams for LLD Guide</strong> | Written for C++ Developers | Master the relationships!</p>
+            <p>💡 Remember: UML is a tool to communicate design - focus on clarity over perfect notation.</p>
+        </footer>
+    </div>
+</body>
+</html> 
